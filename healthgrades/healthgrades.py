@@ -37,9 +37,6 @@ def getServiceLines():
 
     servicelines = session.post(url, data=payload)
     print(servicelines)
-    #servicelines = toJson(makeRequest(url))
-
-    #print(servicelines['description'])
 
 def main():
     url = "https://icd10mappingtool.healthgrades.com"
