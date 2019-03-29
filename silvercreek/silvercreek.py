@@ -1,7 +1,7 @@
 #! python3
 # Healthgrades web scraping
 
-import requests, bs4, json
+import requests, bs4, json, urllib
 
 session = requests.Session()
 session.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'
@@ -39,11 +39,12 @@ def getPayload():
 
 def search():
     global session
-    url = "https://idx.diversesolutions.com"
-    payload = getPayload()
-
-    results = session.post(url, data=payload)
-    print(results)
+    host = "https://idx.diversesolutions.com/api/results"
+    querystring = urllib.parse.urlencode(getPayload())
+    url = host + "?" + querystring
+    
+    response = session.post(url)
+    results = toJson(response)
 
 def main():
     search()
