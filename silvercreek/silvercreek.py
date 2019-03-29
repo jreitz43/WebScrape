@@ -21,9 +21,18 @@ def soup(res):
 def toJson(res):
     return json.loads(res.text)
 
+def getPayload():
+    return {"requester.AccountID":"1838","requester.ApplicationProfile":"dsSearchAgentV3","directive.SortOrders[0].Column":"DateAdded","directive.SortOrders[0].Direction":"DESC","directive.ResultsPerPage":"250","responseDirective.IncludeMetadata":"true","query.SearchSetupID":"6069","query.LinkID":"-1","query.PriceMin":"200000","query.PriceMax":"400000","query.ImprovedSqFtMin":"1500","query.BathsMin":"2","query.ListingStatuses":"1","query.PhotoCountMin":"1","query.Counties[0]":"Ada","query.PropertyTypes[3]":"4719","query.PropertyTypes[2]":"4718","query.PropertyTypes[1]":"4716","query.PropertyTypes[0]":"4713","query.PropertyFeatures[0]":"6023"}
+
+def search():
+    global session
+    url = "https://idx.diversesolutions.com"
+    payload = getPayload()
+
+    results = session.post(url, data=payload)
+    print(results)
+
 def main():
-    url = "https://silvercreekrealty.net/"
+    search()
 
-    webpage = soup(makeRequest(url))
-
-    main()
+main()
